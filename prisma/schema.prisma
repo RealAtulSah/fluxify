@@ -1,0 +1,137 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+}
+
+model BlogPost {
+  id         String   @id @default(cuid())
+  title      String
+  slug       String   @unique
+  category   String
+  tags String @default("[]")
+  coverImage String?
+  excerpt    String?
+  content    String   
+  published  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  business  String
+  role      String?
+  photo     String?
+  rating    Int      @default(5)
+  review    String   
+  approved  Boolean  @default(false)
+  featured  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model PortfolioProject {
+  id          String   @id @default(cuid())
+  title       String
+  client      String
+  category    String
+  image       String?
+  resultStat  String?
+  description String?  
+  challenge   String?  
+  solution    String?  
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CaseStudy {
+  id               String   @id @default(cuid())
+  title            String
+  client           String
+  category         String
+  background       String?  
+  challenge        String?  
+  strategy         String?  
+  results          String?  
+  beforeStats String?
+  afterStats String?
+  testimonialQuote String?  
+  published        Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  icon        String
+  description String?  
+  features String @default("[]")
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PricingPlan {
+  id        String   @id @default(cuid())
+  name      String
+  price     String
+  features String @default("[]")
+  popular   Boolean  @default(false)
+  ctaLabel  String   @default("Get Quote")
+  sortOrder Int      @default(0)
+}
+
+model TeamMember {
+  id          String  @id @default(cuid())
+  name        String
+  role        String
+  bio         String? 
+  photo       String?
+  linkedinUrl String?
+  twitterUrl  String?
+  sortOrder   Int     @default(0)
+}
+
+model ClientLogo {
+  id         String  @id @default(cuid())
+  company    String
+  logoImage  String
+  websiteUrl String?
+  sortOrder  Int     @default(0)
+}
+
+model Lead {
+  id            String   @id @default(cuid())
+  name          String
+  businessName  String?
+  phone         String?
+  email         String
+  service       String?
+  budget        String?
+  message       String?  
+  status        String   @default("New")
+  internalNotes String?  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model SiteSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String 
+}
