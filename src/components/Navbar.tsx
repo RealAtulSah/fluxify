@@ -14,7 +14,7 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ settings = {} }: { settings?: Record<string, string> }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -24,13 +24,18 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const logoText = settings.site_name || 'FluxifyMedia';
+  const splitIndex = logoText.indexOf('Media');
+  const logoMain = splitIndex > -1 ? logoText.substring(0, splitIndex) : logoText;
+  const logoSuffix = splitIndex > -1 ? 'Media' : '';
+
   return (
     <>
       <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
         <div className="container navbar-inner">
           <Link href="/" className="navbar-logo">
             <Zap size={28} />
-            <span>Fluxify<span className="logo-accent">Media</span></span>
+            <span>{logoMain}<span className="logo-accent">{logoSuffix}</span></span>
           </Link>
           <div className={`navbar-links ${mobileOpen ? 'open' : ''}`}>
             {navLinks.map(l => (

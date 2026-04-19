@@ -61,6 +61,13 @@ export default function HomeClient({
   caseStudies: any[];
   logos: any[];
 }) {
+  const displayStats = [
+    { num: parseInt(settings.stat1_num) || 150, suffix: '+', label: settings.stat1_label || 'Clients Served' },
+    { num: parseInt(settings.stat2_num) || 3, suffix: 'X', label: settings.stat2_label || 'Average ROI' },
+    { num: parseInt(settings.stat3_num) || 98, suffix: '%', label: settings.stat3_label || 'Client Satisfaction' },
+    { num: parseInt(settings.stat4_num) || 5, suffix: '+', label: settings.stat4_label || 'Years Experience' },
+  ];
+
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -94,7 +101,7 @@ export default function HomeClient({
       <section className="stats-bar">
         <div className="container">
           <div className="stats-grid">
-            {stats.map((s, i) => (
+            {displayStats.map((s, i) => (
               <div key={i} className="stat-item">
                 <div className="stat-num"><Counter target={s.num} suffix={s.suffix} /></div>
                 <div className="stat-label">{s.label}</div>

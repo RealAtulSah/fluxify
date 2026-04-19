@@ -4,6 +4,7 @@ import { updateSiteSettings } from '@/lib/actions';
 import { Save, Check } from 'lucide-react';
 
 const fields = [
+  { key: 'site_name', label: 'Site Name (e.g. FluxifyMedia)' },
   { key: 'hero_headline', label: 'Hero Headline' },
   { key: 'hero_subheadline', label: 'Hero Subheadline' },
   { key: 'tagline', label: 'Tagline' },
@@ -17,6 +18,14 @@ const fields = [
   { key: 'twitter_url', label: 'Twitter URL' },
   { key: 'meta_title', label: 'Meta Title' },
   { key: 'meta_description', label: 'Meta Description' },
+  { key: 'stat1_num', label: 'Stat 1 Number' },
+  { key: 'stat1_label', label: 'Stat 1 Label' },
+  { key: 'stat2_num', label: 'Stat 2 Number' },
+  { key: 'stat2_label', label: 'Stat 2 Label' },
+  { key: 'stat3_num', label: 'Stat 3 Number' },
+  { key: 'stat3_label', label: 'Stat 3 Label' },
+  { key: 'stat4_num', label: 'Stat 4 Number' },
+  { key: 'stat4_label', label: 'Stat 4 Label' },
 ];
 
 export default function SettingsForm({ initialSettings }: { initialSettings: Record<string, string> }) {

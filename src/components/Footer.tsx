@@ -3,12 +3,17 @@ import Link from 'next/link';
 import { Zap, Mail, Phone, MapPin, ArrowRight, Globe, ExternalLink } from 'lucide-react';
 
 export default function Footer({ settings }: { settings?: Record<string, string> }) {
+  const logoText = settings?.site_name || 'FluxifyMedia';
+  const splitIndex = logoText.indexOf('Media');
+  const logoMain = splitIndex > -1 ? logoText.substring(0, splitIndex) : logoText;
+  const logoSuffix = splitIndex > -1 ? 'Media' : '';
+
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <div className="footer-logo"><Zap size={24} /><span>Fluxify<span style={{color:'var(--accent)'}}>Media</span></span></div>
+            <div className="footer-logo"><Zap size={24} /><span>{logoMain}<span style={{color:'var(--accent)'}}>{logoSuffix}</span></span></div>
             <p>{settings?.tagline || 'We help small businesses and local shops amplify their brand and dominate digital marketing.'}</p>
             <div className="footer-social">
               {settings?.instagram_url && <a href={settings.instagram_url} aria-label="Instagram" target="_blank" rel="noopener noreferrer"><Globe size={20} /></a>}
@@ -56,7 +61,7 @@ export default function Footer({ settings }: { settings?: Record<string, string>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Fluxify Media. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} {settings?.site_name || 'Fluxify Media'}. All rights reserved.</p>
         </div>
       </div>
       <style jsx>{`

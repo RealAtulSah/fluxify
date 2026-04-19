@@ -12,7 +12,7 @@ export default async function PublicLayout({ children }: { children: React.React
 
   return (
     <>
-      <Navbar />
+      <Navbar settings={settings} />
       <main style={{ paddingTop: 'var(--nav-height)' }}>{children}</main>
       <Footer settings={settings} />
       <WhatsAppButton phone={settings.whatsapp_number} />
