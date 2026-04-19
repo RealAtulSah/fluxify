@@ -7,16 +7,17 @@ export default async function ServicesPage() {
     prisma.pricingPlan.findMany({ orderBy: { sortOrder: 'asc' } })
   ]);
 
-  const services = servicesData.map(s => ({
-    ...s,
-    features: JSON.parse(s.features || '[]')
-  }));
+  const services = servicesData.map(s => {
+    let feats = [];
+    try { feats = JSON.parse(s.features || '[]'); } catch (e) {}
+    return { ...s, features: Array.isArray(feats) ? feats : [] };
+  });
 
-  const plans = plansData.map(p => ({
-    ...p,
-    period: '/mo', // Static period for now
-    features: JSON.parse(p.features || '[]')
-  }));
+  const plans = plansData.map(p => {
+    let feats = [];
+    try { feats = JSON.parse(p.features || '[]'); } catch (e) {}
+    return { ...p, period: '/mo', features: Array.isArray(feats) ? feats : [] };
+  });
 
   return <ServicesClient services={services} plans={plans} />;
 }

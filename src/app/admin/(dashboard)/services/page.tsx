@@ -3,5 +3,10 @@ import ServicesManager from '@/components/admin/ServicesManager';
 
 export default async function AdminServicesPage() {
   const services = await prisma.service.findMany({ orderBy: { sortOrder: 'asc' } });
-  return <ServicesManager services={JSON.parse(JSON.stringify(services))} />;
+  const serialized = services.map(s => {
+    let feats = [];
+    try { feats = JSON.parse(s.features || '[]'); } catch (e) {}
+    return { ...s, features: Array.isArray(feats) ? feats : [] };
+  });
+  return <ServicesManager services={serialized} />;
 }

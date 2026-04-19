@@ -38,7 +38,7 @@ export default function PricingManager({ plans: initial }: { plans: Plan[] }) {
             <div className="input-group"><label>Plan Name</label><input className="input" value={p.name} onChange={e => updatePlan(p.id, 'name', e.target.value)} /></div>
             <div className="input-group"><label>Price</label><input className="input" value={p.price} onChange={e => updatePlan(p.id, 'price', e.target.value)} /></div>
             <div className="input-group"><label>CTA Label</label><input className="input" value={p.ctaLabel} onChange={e => updatePlan(p.id, 'ctaLabel', e.target.value)} /></div>
-            <div className="input-group"><label>Features (one per line)</label><textarea className="textarea" value={Array.isArray(p.features) ? p.features.join('\n') : (typeof p.features === 'string' ? JSON.parse(p.features || '[]').join('\n') : '')} onChange={e => updatePlan(p.id, 'features', e.target.value.split('\n'))} style={{ minHeight: 120 }} /></div>
+            <div className="input-group"><label>Features (one per line)</label><textarea className="textarea" value={(Array.isArray(p.features) ? p.features : []).join('\n')} onChange={e => updatePlan(p.id, 'features', e.target.value.split('\n'))} style={{ minHeight: 120 }} /></div>
             <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', cursor: 'pointer' }}>
               <input type="checkbox" checked={p.popular} onChange={e => updatePlan(p.id, 'popular', e.target.checked)} /> Mark as Popular
             </label>
