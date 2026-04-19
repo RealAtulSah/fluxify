@@ -2,19 +2,19 @@
 import Link from 'next/link';
 import { Zap, Mail, Phone, MapPin, ArrowRight, Globe, ExternalLink } from 'lucide-react';
 
-export default function Footer() {
+export default function Footer({ settings }: { settings?: Record<string, string> }) {
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
             <div className="footer-logo"><Zap size={24} /><span>Fluxify<span style={{color:'var(--accent)'}}>Media</span></span></div>
-            <p>We help small businesses and local shops amplify their brand and dominate digital marketing.</p>
+            <p>{settings?.tagline || 'We help small businesses and local shops amplify their brand and dominate digital marketing.'}</p>
             <div className="footer-social">
-              <a href="#" aria-label="Instagram"><Globe size={20} /></a>
-              <a href="#" aria-label="Facebook"><Globe size={20} /></a>
-              <a href="#" aria-label="LinkedIn"><ExternalLink size={20} /></a>
-              <a href="#" aria-label="Twitter"><Globe size={20} /></a>
+              {settings?.instagram_url && <a href={settings.instagram_url} aria-label="Instagram" target="_blank" rel="noopener noreferrer"><Globe size={20} /></a>}
+              {settings?.facebook_url && <a href={settings.facebook_url} aria-label="Facebook" target="_blank" rel="noopener noreferrer"><Globe size={20} /></a>}
+              {settings?.linkedin_url && <a href={settings.linkedin_url} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><ExternalLink size={20} /></a>}
+              {settings?.twitter_url && <a href={settings.twitter_url} aria-label="Twitter" target="_blank" rel="noopener noreferrer"><Globe size={20} /></a>}
             </div>
           </div>
           <div>
@@ -42,9 +42,9 @@ export default function Footer() {
           <div>
             <h4>Contact Info</h4>
             <ul className="footer-contact">
-              <li><Mail size={16} /><span>hello@fluxifymedia.com</span></li>
-              <li><Phone size={16} /><span>+91 98765 43210</span></li>
-              <li><MapPin size={16} /><span>Noida, Uttar Pradesh</span></li>
+              <li><Mail size={16} /><span>{settings?.contact_email || 'hello@fluxifymedia.com'}</span></li>
+              <li><Phone size={16} /><span>{settings?.contact_phone || '+91 98765 43210'}</span></li>
+              <li><MapPin size={16} /><span>{settings?.office_address || 'Noida, Uttar Pradesh'}</span></li>
             </ul>
             <div className="footer-newsletter">
               <h4>Newsletter</h4>

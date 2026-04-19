@@ -1,10 +1,14 @@
 'use client';
 import { MessageCircle } from 'lucide-react';
 
-export default function WhatsAppButton() {
+export default function WhatsAppButton({ phone }: { phone?: string }) {
+  // Clean up the phone number for WhatsApp link (remove spaces, +, etc)
+  const cleanPhone = phone ? phone.replace(/\D/g, '') : '919999999999';
+  const waLink = `https://wa.me/${cleanPhone}`;
+
   return (
     <>
-      <a href="https://wa.me/919999999999" target="_blank" rel="noopener noreferrer" className="whatsapp-btn" aria-label="Chat on WhatsApp">
+      <a href={waLink} target="_blank" rel="noopener noreferrer" className="whatsapp-btn" aria-label="Chat on WhatsApp">
         <MessageCircle size={28} />
       </a>
       <style jsx>{`
