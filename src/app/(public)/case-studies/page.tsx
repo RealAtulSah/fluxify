@@ -9,7 +9,7 @@ export const metadata = {
 export default async function CaseStudiesPage() {
   const caseStudies = await prisma.caseStudy.findMany({
     where: { published: true },
-    orderBy: { sortOrder: 'asc' },
+    orderBy: { createdAt: 'desc' },
   });
 
   return <CaseStudiesClient caseStudies={caseStudies} />;

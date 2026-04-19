@@ -8,8 +8,8 @@ export const metadata = {
 
 export default async function TestimonialsPage() {
   const testimonials = await prisma.testimonial.findMany({
-    where: { published: true },
-    orderBy: { sortOrder: 'asc' },
+    where: { approved: true },
+    orderBy: { createdAt: 'desc' },
   });
 
   return <TestimonialsClient testimonials={testimonials} />;

@@ -4,7 +4,7 @@ import HomeClient from './HomeClient';
 export default async function HomePage() {
   const [services, caseStudies, logos, settingsData] = await Promise.all([
     prisma.service.findMany({ orderBy: { sortOrder: 'asc' }, take: 6 }),
-    prisma.caseStudy.findMany({ where: { published: true }, orderBy: { sortOrder: 'asc' }, take: 3 }),
+    prisma.caseStudy.findMany({ where: { published: true }, orderBy: { createdAt: 'desc' }, take: 3 }),
     prisma.clientLogo.findMany({ orderBy: { sortOrder: 'asc' } }),
     prisma.siteSetting.findMany()
   ]);

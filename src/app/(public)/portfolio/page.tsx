@@ -7,9 +7,9 @@ export const metadata = {
 };
 
 export default async function PortfolioPage() {
-  const projects = await prisma.portfolioItem.findMany({
+  const projects = await prisma.portfolioProject.findMany({
     where: { published: true },
-    orderBy: { sortOrder: 'asc' },
+    orderBy: { createdAt: 'desc' },
   });
 
   const categories = ['All', ...Array.from(new Set(projects.map((p) => p.category))).filter(Boolean)];
